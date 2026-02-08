@@ -78,14 +78,12 @@
                             <!-- Week 1 -->
                             <div class="gallery-week" id="week1">
                                 <div class="gallery-week-header">
-                                    <h3>Week 1: Introduction to Interaction Design</h3>
+                                    <h3>Week 1: HW1: The Interactive Self</h3>
                                     <span class="toggle-icon">+</span>
                                 </div>
                                 <div class="gallery-week-content">
                                     <div class="gallery-description">
-                                        <p>This week, students explored the fundamentals of interaction design, focusing on user-centered design
-                                            principles and creating their first wireframes. The projects showcase various approaches to solving
-                                            common interface challenges.</p>
+                                        <p>This week, ...</p>
                                     </div>
                                     <div class="gallery-grid">
                                         <div class="gallery-item" data-caption="Student Project 1 - Homepage Design">
@@ -114,13 +112,12 @@
                             <!-- Week 2 -->
                             <div class="gallery-week" id="week2">
                                 <div class="gallery-week-header">
-                                    <h3>Week 2: User Research Methods</h3>
-                                    <span class="toggle-icon">+</span>
+                                    <h3>Week 2: HW2: Design Autopsy</h3>
+                                    <span class="toggle-icon noselect">+</span>
                                 </div>
                                 <div class="gallery-week-content">
                                     <div class="gallery-description">
-                                        <p>Students conducted user research and created personas, user journey maps, and empathy maps. These
-                                            projects demonstrate their understanding of qualitative and quantitative research methods.</p>
+                                        <p>This week, ...</p>
                                     </div>
                                     <div class="gallery-grid">
                                         <div class="gallery-item" data-caption="Student Project 3 - Dashboard Concept">
@@ -135,18 +132,6 @@
                             </div>
                         
                             <!-- Add more weeks as needed -->
-                        </div>
-                        
-                        <!-- Lightbox Modal -->
-                        <div class="lightbox" id="lightbox">
-                            <div class="lightbox-close">&times;</div>
-                            <div class="lightbox-prev">‹</div>
-                            <div class="lightbox-next">›</div>
-                            <div class="lightbox-content">
-                                <img src="" alt="">
-                                <div class="lightbox-caption"></div>
-                                <div class="lightbox-thumbnails"></div>
-                            </div>
                         </div>
 
                     </div>
@@ -249,129 +234,7 @@
                         openLightbox(allItems, clickedIndex);
                     });
                 });
-
-                // Lightbox controls
-                document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-                document.querySelector('.lightbox-prev').addEventListener('click', showPrevImage);
-                document.querySelector('.lightbox-next').addEventListener('click', showNextImage);
-
-                // Close lightbox on background click
-                document.getElementById('lightbox').addEventListener('click', function (e) {
-                    if (e.target === this) {
-                        closeLightbox();
-                    }
-                });
-
-                // Keyboard navigation
-                document.addEventListener('keydown', function (e) {
-                    if (!document.getElementById('lightbox').classList.contains('active')) return;
-
-                    if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowLeft') showPrevImage();
-                    if (e.key === 'ArrowRight') showNextImage();
-                });
-
-                // Handle deep linking from homepage
-                handleDeepLink();
-            }
-
-            function handleDeepLink() {
-                // Check if there's a hash in the URL
-                const hash = window.location.hash;
-                if (hash) {
-                    // Remove the # symbol
-                    const weekId = hash.substring(1);
-                    const weekElement = document.getElementById(weekId);
-
-                    if (weekElement && weekElement.classList.contains('gallery-week')) {
-                        // Small delay to ensure page is fully loaded
-                        setTimeout(function () {
-                            // Open the accordion
-                            weekElement.classList.add('active');
-
-                            // Scroll to the week with smooth behavior
-                            weekElement.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }, 100);
-                    }
-                }
-            }
-
-            function openLightbox(images, index) {
-                currentWeekImages = images;
-                currentImageIndex = index;
-
-                const lightbox = document.getElementById('lightbox');
-                const img = lightbox.querySelector('.lightbox-content img');
-                const caption = lightbox.querySelector('.lightbox-caption');
-                const thumbnailsContainer = lightbox.querySelector('.lightbox-thumbnails');
-
-                // Set main image and caption
-                const currentItem = images[index];
-                img.src = currentItem.querySelector('img').src;
-                caption.textContent = currentItem.getAttribute('data-caption') || '';
-
-                // Create thumbnails for all images
-                thumbnailsContainer.innerHTML = '';
-                images.forEach((item, i) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = item.querySelector('img').src;
-                    thumb.classList.add('lightbox-thumbnail');
-                    if (i === index) thumb.classList.add('active');
-
-                    thumb.addEventListener('click', function () {
-                        showImage(i);
-                    });
-
-                    thumbnailsContainer.appendChild(thumb);
-                });
-
-                // Show lightbox
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                const lightbox = document.getElementById('lightbox');
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            function showImage(index) {
-                currentImageIndex = index;
-
-                const lightbox = document.getElementById('lightbox');
-                const img = lightbox.querySelector('.lightbox-content img');
-                const caption = lightbox.querySelector('.lightbox-caption');
-                const thumbnails = lightbox.querySelectorAll('.lightbox-thumbnail');
-
-                const currentItem = currentWeekImages[index];
-                img.src = currentItem.querySelector('img').src;
-                caption.textContent = currentItem.getAttribute('data-caption') || '';
-
-                // Update active thumbnail
-                thumbnails.forEach((thumb, i) => {
-                    thumb.classList.toggle('active', i === index);
-                });
-
-                // Scroll active thumbnail into view
-                if (thumbnails[index]) {
-                    thumbnails[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                }
-            }
-
-            function showPrevImage() {
-                currentImageIndex = (currentImageIndex - 1 + currentWeekImages.length) % currentWeekImages.length;
-                showImage(currentImageIndex);
-            }
-
-            function showNextImage() {
-                currentImageIndex = (currentImageIndex + 1) % currentWeekImages.length;
-                showImage(currentImageIndex);
-            }
-
+            } 
             // Initialize when DOM is ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initGallery);
