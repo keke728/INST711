@@ -4494,6 +4494,10 @@ body.search-is-visible {
 	padding-bottom: 0;
 }
 
+.s-content .tm {
+	margin-top: 2rem;
+}
+
 .s-content--single {
 	padding-bottom: 0;
 }
@@ -5469,4 +5473,19 @@ hr + h4 {
 .spring-break {
 	background-color: #e8e8e8;
 	color: #222; /* deep rose text */
+}
+
+/* -------------------------------------------------------------------
+ * ## span decorations
+ * ------------------------------------------------------------------- */
+span.bold {
+	font-weight: 600;
+}
+
+span.italic {
+	font-style: italic;
+}
+
+span.underline {
+	text-decoration: underline;
 }
