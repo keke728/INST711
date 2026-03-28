@@ -75,63 +75,43 @@
 
                         <!-- Gallery Content -->
                         <div class="gallery-container">
-                            <!-- Week 1 -->
-                            <div class="gallery-week" id="week1">
+                        
+                            <div class="gallery-week active" id="project1">
                                 <div class="gallery-week-header">
-                                    <h3>Week 1: HW1: The Interactive Self</h3>
+                                    <h3>Project 1: Playful Redesign</h3>
+                                    <span class="toggle-icon">-</span>
+                                </div>
+                                <div class="gallery-week-content">
+                                    <div class="gallery-description">
+                                        <p>Select a team below to view their PDF submission.</p>
+                                    </div>
+                                    <div class="team-list">
+                                        <button class="team-btn" data-pdf="pdfs/project1/Team Lime Project 1 Design Brief.pdf">
+                                            <span class="team-name">Team Lime:</span> <span class="project-name">Project Name Goes Here</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="gallery-week" id="project2">
+                                <div class="gallery-week-header">
+                                    <h3>Project 2: Final Submissions</h3>
                                     <span class="toggle-icon">+</span>
                                 </div>
                                 <div class="gallery-week-content">
                                     <div class="gallery-description">
-                                        <p>This week, ...</p>
+                                        <p>Select a team below to view their PDF submission.</p>
                                     </div>
-                                    <div class="gallery-grid">
-                                        <div class="gallery-item" data-caption="Student Project 1 - Homepage Design">
-                                            <img src="images/Argentum Visual - 01.jpg" alt="Project 1">
-                                        </div>
-                                        <div class="gallery-item" data-caption="Student Project 2 - Mobile Interface">
-                                            <img src="images/Grtm-ugXUAEZnjk.jpeg" alt="Project 2">
-                                        </div>
-                                        <div class="gallery-item" data-caption="Student Project 3 - Dashboard Concept">
-                                            <img src="images/GwWLjZ0WEAMsIYM.jpeg" alt="Project 3">
-                                        </div>
-                                        <div class="gallery-item" data-caption="Student Project 4 - Wireframe Study">
-                                            <img src="images/Josh Norman - 01.jpg" alt="Project 4">
-                                        </div>
-                                        <div class="gallery-item" data-caption="Student Project 5 - Color Exploration">
-                                            <img src="images/kiki's delivery service.jpg" alt="Project 5">
-                                        </div>
-                                        <div class="gallery-item" data-caption="Student Project 6 - Typography Study">
-                                            <img src="images/sample-image.jpg" alt="Project 6">
-                                        </div>
-                                        <!-- Add more gallery items as needed -->
+                                    <div class="team-list">
+                                        <button class="team-btn" data-pdf="pdfs/team-red-final.pdf">
+                                            <span class="team-name">Team Red:</span> <span class="project-name">Project Name Goes Here</span>
+                                        </button>
+                                        <button class="team-btn" data-pdf="pdfs/team-orange-final.pdf">
+                                            <span class="team-name">Team Orange:</span> <span class="project-name">Project Name Goes Here</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        
-                            <!-- Week 2 -->
-                            <div class="gallery-week" id="week2">
-                                <div class="gallery-week-header">
-                                    <h3>Week 2: HW2: Design Autopsy</h3>
-                                    <span class="toggle-icon noselect">+</span>
-                                </div>
-                                <div class="gallery-week-content">
-                                    <div class="gallery-description">
-                                        <p>This week, ...</p>
-                                    </div>
-                                    <div class="gallery-grid">
-                                        <div class="gallery-item" data-caption="Student Project 3 - Dashboard Concept">
-                                            <img src="images/GwWLjZ0WEAMsIYM.jpeg" alt="Project 3">
-                                        </div>
-                                        <div class="gallery-item" data-caption="Student Project 4 - Wireframe Study">
-                                            <img src="images/Josh Norman - 01.jpg" alt="Project 4">
-                                        </div>
-                                        <!-- Add more gallery items as needed -->
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <!-- Add more weeks as needed -->
                         </div>
 
                     </div>
@@ -167,85 +147,56 @@
     
     </footer> <!-- end s-footer -->
 
-   <!-- Java Script
-   ================================================== --> 
-   <script src="js/jquery-3.2.1.min.js"></script>
-   <script src="js/plugins.js"></script>
-   <script src="js/main.js"></script>
+    <!-- Java Script
+       ================================================== -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
 
     <script>
-        // Gallery Accordion and Lightbox Functionality
         (function () {
             'use strict';
 
-            let currentWeekImages = [];
-            let currentImageIndex = 0;
-
-            // Initialize gallery
             function initGallery() {
-                // Handle "show more" overlay for galleries with more than 4 items
-                document.querySelectorAll('.gallery-week').forEach(week => {
-                    const grid = week.querySelector('.gallery-grid');
-                    const items = Array.from(week.querySelectorAll('.gallery-item'));
-
-                    if (items.length > 4) {
-                        // Calculate how many more images there are
-                        const moreCount = items.length - 4;
-
-                        // Show only first 4 items in the grid
-                        items.forEach((item, index) => {
-                            if (index >= 4) {
-                                item.style.display = 'none';
-                            }
-                        });
-
-                        // Add "...X more" overlay to the 4th item with dynamic count
-                        items[3].classList.add('show-more');
-                        items[3].setAttribute('data-more-count', `...${moreCount} more`);
-                    }
-                });
-
                 // Accordion functionality
                 document.querySelectorAll('.gallery-week-header').forEach(header => {
                     header.addEventListener('click', function () {
                         const week = this.parentElement;
                         const wasActive = week.classList.contains('active');
+                        const icon = this.querySelector('.toggle-icon');
 
                         // Close all weeks
                         document.querySelectorAll('.gallery-week').forEach(w => {
                             w.classList.remove('active');
+                            w.querySelector('.toggle-icon').textContent = '+';
                         });
 
                         // Open clicked week if it wasn't active
                         if (!wasActive) {
                             week.classList.add('active');
+                            icon.textContent = '-';
                         }
                     });
                 });
 
-                // Lightbox functionality
-                document.querySelectorAll('.gallery-item').forEach((item) => {
-                    item.addEventListener('click', function (e) {
-                        const week = this.closest('.gallery-week');
-                        const allItems = Array.from(week.querySelectorAll('.gallery-item'));
-                        const clickedIndex = allItems.indexOf(this);
-
-                        // Open lightbox with all images, starting at the clicked one
-                        openLightbox(allItems, clickedIndex);
+                // Instant New Tab functionality (Bypasses template link delay)
+                document.querySelectorAll('.team-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const pdfSrc = this.getAttribute('data-pdf');
+                        window.open(pdfSrc, '_blank');
                     });
                 });
-            } 
+            }
+
             // Initialize when DOM is ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initGallery);
             } else {
                 initGallery();
             }
-
-            // Re-handle deep links when hash changes
-            window.addEventListener('hashchange', handleDeepLink);
         })();
     </script>
+
 </body>
 
 </html>
