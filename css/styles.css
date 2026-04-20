@@ -5510,8 +5510,8 @@ span.underline {
  * ------------------------------------------------------------------- */
 
 .gallery-container hr {
-	margin-top: 8rem;
-	margin-bottom: 8rem;
+	margin-top: 6rem;
+	margin-bottom: 4rem;
 }
 
 .gallery-project > p {
@@ -5519,9 +5519,8 @@ span.underline {
 	padding: 0;
 }
 
-.gallery-project h3,
-.gallery-project h4 {
-	margin-top: 0rem;
+.gallery-project h3 {
+	margin-top: 4rem;
 }
 
 .gallery-project h4 {
