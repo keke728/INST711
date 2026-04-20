@@ -5527,12 +5527,19 @@ span.underline {
 .gallery-project h4 {
 	text-align: center;
 	margin-top: 1rem;
+	margin-bottom: 0rem;
+}
+
+.gallery-award-container > p {
+	text-align: center;
 	margin-bottom: 2.2rem;
+	color: #7e7e7e;
 }
 
 .gallery-award-container {
 	width: 100%;
-	background-color: #e0e0e0;
+	background-color: #fff;
+	border: 2px solid #e8e8e8;
 	margin: 0;
 	margin-top: 4rem;
 	padding: 2rem;
@@ -5544,6 +5551,8 @@ span.underline {
 	width: 160px;
 	display: block;
 	margin: 0 auto;
+	margin-top: 1rem;
+	margin-bottom: 1.6rem;
 }
 
 .gallery-project-container {
@@ -5561,6 +5570,7 @@ span.underline {
 	/* border-style: solid;
 	border-width: 2px;
 	border-color: #c1c1c1; */
+	border: 2px solid #e8e8e8;
 	border-radius: 8px;
 	background-color: #f5f5f5;
 	padding: 1rem;
