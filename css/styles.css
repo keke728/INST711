@@ -5525,8 +5525,22 @@ span.underline {
 
 .gallery-project h4 {
 	text-align: center;
-	margin-top: 1rem;
+	margin-top: 0rem;
 	margin-bottom: 0rem;
+
+	/* background-color: #000000; */
+	/* color: #ffffff; */
+	font-weight: 700;
+	padding: 0.4rem 0.8rem;
+	border-radius: 6px;
+	border-style: solid;
+	border-color: #eba64c;
+	border-width: 4px;
+	display: inline-block;
+}
+
+.gallery-award-container > .award-heading-wrap {
+	text-align: center;
 }
 
 .gallery-award-container > p {
