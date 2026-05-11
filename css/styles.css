@@ -5519,7 +5519,7 @@ span.underline {
 }
 
 .gallery-accordion {
-	border: 1px solid var(--color-border);
+	border: 1px solid #bebebe; /* ← accordion border colour. Change this hex to any colour you like */
 	border-radius: 8px;
 	margin-bottom: 1.6rem;
 	overflow: hidden;
@@ -5527,7 +5527,6 @@ span.underline {
 }
 
 .gallery-accordion-header {
-	/* reset button styles */
 	appearance: none;
 	-webkit-appearance: none;
 	background: #f8f8f8;
@@ -5623,13 +5622,22 @@ span.underline {
 	border-bottom: 2px solid #000000;
 }
 
+/* ── Table header font ────────────────────────────────────────────────
+ * Uses Figtree — the same font as the site body text, set in styles.css:
+ *     body { font-family: Figtree, sans-serif; }
+ * To change the font: replace 'Figtree, sans-serif' below with any
+ * font-family value. To restore uppercase labels, change text-transform
+ * back to 'uppercase' and reinstate letter-spacing.
+ * ─────────────────────────────────────────────────────────────────── */
 .gallery-table th {
-	font-family: Figtree, sans-serif;
+	font-family: Figtree, sans-serif; /* ← same as site body font */
 	font-weight: 700;
-	font-size: var(--text-sm);
+	font-size: var(
+		--text-size
+	); /* ← base size (18px). Use var(--text-sm) for smaller, var(--text-md) for larger */
 	color: var(--color-text-dark);
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
+	text-transform: none; /* ← removed uppercase */
+	letter-spacing: normal; /* ← removed wide spacing that suited uppercase */
 	padding: 0.8rem 1.2rem;
 	text-align: left;
 	border-bottom: 2px solid #000000;
@@ -5651,6 +5659,12 @@ span.underline {
 
 .gallery-table th.col-awards {
 	width: 100px;
+	text-align: center;
+}
+
+.gallery-table th.col-medium {
+	width: 1%;
+	white-space: nowrap;
 	text-align: center;
 }
 
@@ -5678,6 +5692,11 @@ span.underline {
 
 .gallery-table td.col-awards {
 	text-align: center;
+}
+
+.gallery-table td.col-medium {
+	text-align: center;
+	white-space: nowrap;
 }
 
 .gallery-table td.col-link {
@@ -5713,6 +5732,86 @@ span.underline {
 }
 
 /* -------------------------------------------------------------------
+ * ## "View more" toggle row
+ *
+ * The five hidden rows carry the class .gallery-extra-row.
+ * They start hidden (display: none) and become visible when
+ * JavaScript adds .is-visible to each one.
+ *
+ * The trigger is .gallery-view-more-row / .gallery-view-more-btn.
+ * ------------------------------------------------------------------- */
+
+/* Hidden extra rows — shown when JS sets style.display = 'table-row' */
+.gallery-extra-row {
+	/* initial display handled by JS on page load to guarantee inline-style specificity */
+}
+
+/* The trigger row itself */
+.gallery-view-more-row td {
+	padding: 0;
+	border-bottom: none;
+}
+
+/* The button inside the trigger row */
+.gallery-view-more-btn {
+	/* reset inherited button styles from the global stylesheet */
+	appearance: none;
+	-webkit-appearance: none;
+	background: transparent;
+	border: none;
+	border-top: 1px dashed var(--color-border);
+	border-bottom: 1px dashed var(--color-border);
+	border-radius: 0;
+	width: 100%;
+	padding: 1rem 1.2rem;
+	margin: 0;
+	height: auto;
+	letter-spacing: normal;
+	text-transform: none;
+	line-height: normal;
+
+	/* layout */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6rem;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.gallery-view-more-btn:hover,
+.gallery-view-more-btn:focus {
+	background-color: #f0f0f0;
+	outline: none;
+	color: inherit;
+}
+
+.gallery-view-more-label {
+	font-family: Figtree, sans-serif;
+	font-size: var(--text-sm);
+	font-weight: 600;
+	color: var(--color-gray-10);
+	letter-spacing: 0.03em;
+}
+
+/* Chevron SVG — rotates when open */
+.gallery-view-more-chevron {
+	width: 1.6rem;
+	height: 1.6rem;
+	fill: none;
+	stroke: var(--color-gray-10);
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	flex-shrink: 0;
+	transition: transform 0.2s ease;
+}
+
+.gallery-view-more-chevron.is-open {
+	transform: rotate(180deg);
+}
+
+/* -------------------------------------------------------------------
  * ## Award Icons
  * ------------------------------------------------------------------- */
 
@@ -5729,27 +5828,34 @@ span.underline {
 	transform: scale(1.2);
 }
 
-/* Tooltip via title attribute is the default — but we can also add
-   a custom pseudo-element tooltip for better styling */
 .award-icon[title] {
 	position: relative;
 }
 
 /* -------------------------------------------------------------------
- * ## Video Link Icon
+ * ## Action Link Buttons (Video ▶ and Medium 🔗)
+ *
+ * Icon shapes are controlled by the SVG inside each anchor in gallery.html.
+ * To swap an icon:
+ *   1. Find <a class="gallery-video-link"> or <a class="gallery-medium-link">
+ *   2. Replace the <svg>…</svg> with any icon SVG from:
+ *      • https://lucide.dev  (search "play", "link2", "external-link")
+ *      • https://heroicons.com
+ *      • https://feathericons.com
+ *
+ * Button size, circle shape, background colour, and hover colour
+ * are controlled below.
  * ------------------------------------------------------------------- */
 
-.gallery-video-link {
+.gallery-video-link,
+.gallery-medium-link {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	width: 3.2rem;
 	height: 3.2rem;
 	border-radius: 50%;
-	background-color: #000000;
-	color: #ffffff;
-	font-size: 1.4rem;
-	font-weight: 700;
+	background-color: #989898; /* ← icon button colour. Change this hex to any colour you like */
 	text-decoration: none;
 	line-height: 1;
 	transition:
@@ -5757,10 +5863,33 @@ span.underline {
 		transform 0.15s ease;
 }
 
+/* Play icon: filled triangle */
+.gallery-video-link svg {
+	width: 1.3rem;
+	height: 1.3rem;
+	fill: #ffffff;
+	stroke: none;
+	display: block;
+	margin-left: 0.15rem; /* optical centering */
+}
+
+/* Link icon: chain outline */
+.gallery-medium-link svg {
+	width: 1.4rem;
+	height: 1.4rem;
+	fill: none;
+	stroke: #ffffff;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	display: block;
+}
+
 .gallery-video-link:hover,
-.gallery-video-link:focus {
+.gallery-video-link:focus,
+.gallery-medium-link:hover,
+.gallery-medium-link:focus {
 	background-color: var(--color-1);
-	color: #ffffff;
 	transform: scale(1.1);
 	outline: none;
 }
